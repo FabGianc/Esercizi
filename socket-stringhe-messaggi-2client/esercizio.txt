@@ -1,0 +1,41 @@
+
+Realizzare un'applicazione di rete per inviare al server dati anagrafici.
+
+Il server deve avere una lista di dati anagrafici. Ciascun dato anagrafico è un 
+dizionario con le seguenti chiavi:
+'nome'
+'cognone'
+'data di nascita'
+'residenza'
+
+L'applicazione client chiede all'untente di inserire i dati anagrafici di una persona
+dopo essersi connessa al server, crea il dizionario e lo trasforma in stringa json.
+Invia quindi la stringa al server secondo un protocollo che è il seguente:
+- calcola la lunghezza della stringa
+- invia la lunghezza come intero di 4 byte
+- invia la stringa interamente subito dopo
+
+(vedere codice esempio nella funzione 'invio_messaggio' e 'lettura_messaggio')
+
+L'applicazione server è in ascolto perenne di una connessione.
+Quando un client si connette, attende il messaggio secondo il protocollo descritto sopra.
+Riceve il messaggio, e converte la stringa json in un dizionario che inserisce nella lista.
+
+
+AGGIUNTA POSSIBILE:
+
+Quando si avvia il client, si chiede all'utente se vuole inserire un nuovo dato
+anagrafico o visualizzare quelli inseriti nel server.
+
+Nel primo caso il programma si comporta come descritto sopra.
+Nel secondo caso, il client invia il messaggio 'viauslizza' al server, sempre
+usando il protocollo descritto sopra (invio lunghezza + messaggio)
+
+Lato server, quando il server legge il messaggio dal client e lo converte in stringa,
+fa il seguente controllo:
+
+if messaggio == "visualizza":
+    => allora invio al server la lista di dizionari (anche questa può essere tradotta in json)
+
+else:
+    => allora il messaggio inviato è un dizionario in json, lo converto e lo aggiungo alla lista
